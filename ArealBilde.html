@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>java</title>
+        <script>
+            
+        window.onload = oppstart;
+        tall = []    
+        
+        function oppstart(){
+                document.getElementById("btnBeregn"). onclick = beregn;
+        }
+            
+
+        function beregn() {
+            var bredde = document.getElementById("bredde").value;
+            var høyde = 10 - bredde;
+            var areal = bredde * høyde;
+            
+            if (bredde <= 9 && bredde >=1) {
+                if (tall.includes(bredde)){
+                    if (tall.length == 9) {
+                        document.getElementById("resultat"). innerHTML = "Du har brukt opp alle tallene";;
+                        } 
+                    else {
+                        document.getElementById("resultat"). innerHTML = "Du har allerede brukt" + tall;;
+                    }
+                }
+                
+                else{
+                    tall.push(bredde)
+                    document.getElementById("resultat"). innerHTML = "Arealet blir " + areal;
+                    document.getElementById("eksempel").innerHTML = '<div class="box" style="width:' + (bredde*50)+ 'px; height:'+(høyde*50)+'px;"><p>'+ areal+'</p></div>';
+                    audio = new Audio("lyd.mp3");
+                    audio.play();
+                    setTimeout(function(){
+                    audio.pause();
+                    }, 2000)
+                }
+                }
+            
+            else {
+                document.getElementById("resultat"). innerHTML = "Tallet må være mellom 1-9";
+                }
+            }
+            
+        </script>
+        <style>
+            .box {
+                border: 3px solid rgb(34, 28, 28);
+                background-color: grey;
+                position: relative;
+                margin: auto;
+                animation: transformer 2s ease-in 0s 1;
+            }
+            input {
+            width: 40px;
+            
+            }       
+            @keyframes transformer {
+            from {
+                transform: scale(0);
+            }
+            to {
+                transform:scale(1);
+            }
+
+        }
+        </style>
+    </head>
+    <body>
+        <p> 
+        Bredde:<input type="number" min="1" max="9" id="bredde" />cm<br/> 
+        <button id="btnBeregn">Beregn areal</button>
+        <p id="resultat"></p>
+        <div id="eksempel"></div>
+
+    </body>
+</html>
